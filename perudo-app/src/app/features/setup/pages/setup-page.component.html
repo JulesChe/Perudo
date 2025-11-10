@@ -1,0 +1,61 @@
+<div class="setup-container">
+  <div class="setup-card">
+    <h1 class="title">🎲 Perudo</h1>
+    <p class="subtitle">Configurez votre partie</p>
+
+    <div class="players-section">
+      <h2 class="section-title">Joueurs ({{ playerNames.length }})</h2>
+
+      <div *ngFor="let name of playerNames; let i = index; trackBy: trackByIndex" class="player-input-row">
+        <span class="player-number">{{ i + 1 }}.</span>
+        <input
+          type="text"
+          [(ngModel)]="playerNames[i]"
+          [placeholder]="'Joueur ' + (i + 1)"
+          class="player-input"
+          [class.error]="errorMessage && !playerNames[i].trim()"
+          maxlength="20"
+        />
+        <button
+          *ngIf="playerNames.length > minPlayers"
+          (click)="removePlayer(i)"
+          class="btn-remove"
+          type="button"
+        >
+          ✕
+        </button>
+      </div>
+
+      <button
+        *ngIf="playerNames.length < maxPlayers"
+        (click)="addPlayer()"
+        class="btn-add"
+        type="button"
+      >
+        + Ajouter un joueur
+      </button>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <div class="actions">
+      <button
+        (click)="startGame()"
+        [disabled]="!isFormValid"
+        class="btn-start"
+        type="button"
+      >
+        Commencer la partie
+      </button>
+    </div>
+
+    <div class="rules-hint">
+      <p class="text-sm text-gray-600">
+        <strong>Rappel:</strong> {{ minPlayers }} à {{ maxPlayers }} joueurs • 5 dés par joueur
+        • Les "as" (1) sont des jokers
+      </p>
+    </div>
+  </div>
+</div>

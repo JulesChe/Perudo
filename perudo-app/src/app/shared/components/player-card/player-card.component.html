@@ -1,0 +1,23 @@
+<div [class]="cardClasses">
+  <div class="player-header">
+    <div class="player-info">
+      <h3 class="player-name">{{ player.name }}</h3>
+      <span *ngIf="statusBadge" class="status-badge">{{ statusBadge }}</span>
+      <span *ngIf="isPalifico" class="palifico-badge">⚠️ PALIFICO</span>
+    </div>
+
+    <div class="dice-count">
+      <span class="dice-count-number">{{ player.dice.length }}</span>
+      <span class="dice-count-label">dé(s)</span>
+    </div>
+  </div>
+
+  <div *ngIf="showDice && player.dice.length > 0" class="player-dice">
+    <app-die
+      *ngFor="let die of player.dice"
+      [value]="die.value"
+      [isVisible]="die.isVisible"
+      [size]="isCompact ? 'small' : 'medium'"
+    ></app-die>
+  </div>
+</div>

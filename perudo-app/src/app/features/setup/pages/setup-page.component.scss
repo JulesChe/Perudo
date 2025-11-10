@@ -1,0 +1,67 @@
+.setup-container {
+  @apply min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center p-4;
+}
+
+.setup-card {
+  @apply bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full;
+}
+
+.title {
+  @apply text-4xl font-bold text-center text-gray-800 mb-2;
+}
+
+.subtitle {
+  @apply text-center text-gray-600 mb-8;
+}
+
+.players-section {
+  @apply mb-6;
+}
+
+.section-title {
+  @apply text-xl font-semibold text-gray-700 mb-4;
+}
+
+.player-input-row {
+  @apply flex items-center gap-3 mb-3;
+}
+
+.player-number {
+  @apply text-gray-500 font-medium w-6;
+}
+
+.player-input {
+  @apply flex-1 px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none transition-colors;
+
+  &.error {
+    @apply border-red-500;
+  }
+}
+
+.btn-remove {
+  @apply w-8 h-8 flex items-center justify-center bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors;
+}
+
+.btn-add {
+  @apply w-full py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-medium mt-2;
+}
+
+.error-message {
+  @apply bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-4;
+}
+
+.actions {
+  @apply mb-6;
+}
+
+.btn-start {
+  @apply w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-bold text-lg;
+
+  &:disabled {
+    @apply bg-gray-400 cursor-not-allowed hover:bg-gray-400;
+  }
+}
+
+.rules-hint {
+  @apply bg-blue-50 rounded-lg p-4 border border-blue-200;
+}

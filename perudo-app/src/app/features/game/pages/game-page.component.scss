@@ -1,0 +1,202 @@
+.game-container {
+  @apply min-h-screen bg-gradient-to-br from-green-500 to-blue-600 p-4;
+}
+
+.game-header {
+  @apply flex justify-between items-center mb-4 bg-white rounded-lg px-6 py-4 shadow-lg;
+}
+
+.game-title {
+  @apply text-3xl font-bold text-gray-800;
+}
+
+.btn-back {
+  @apply px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors;
+}
+
+.phase-banner {
+  @apply bg-blue-600 text-white text-center py-3 rounded-lg mb-4 shadow-lg font-semibold text-lg;
+
+  &.palifico {
+    @apply bg-yellow-500 text-gray-900;
+  }
+}
+
+.palifico-warning {
+  @apply block text-sm mt-1;
+}
+
+.game-content {
+  @apply space-y-4;
+}
+
+.current-player-section {
+  @apply bg-white rounded-lg p-6 shadow-lg;
+}
+
+.section-title {
+  @apply text-xl font-bold text-gray-800 mb-4;
+}
+
+.dice-container {
+  @apply flex flex-wrap gap-3 justify-center;
+}
+
+.current-bid-section {
+  @apply bg-purple-100 border-2 border-purple-400 rounded-lg p-4 text-center;
+
+  h3 {
+    @apply text-lg font-semibold text-purple-800 mb-2;
+  }
+}
+
+.current-bid {
+  @apply flex items-center justify-center gap-3;
+}
+
+.bid-quantity {
+  @apply text-4xl font-bold text-purple-700;
+}
+
+.bid-label {
+  @apply text-2xl text-gray-600;
+}
+
+.bid-controls {
+  @apply bg-white rounded-lg p-6 shadow-lg;
+
+  h3 {
+    @apply text-lg font-semibold text-gray-800 mb-4;
+  }
+}
+
+.bid-inputs {
+  @apply flex items-end gap-4 mb-4 justify-center;
+}
+
+.input-group {
+  @apply flex flex-col;
+
+  label {
+    @apply text-sm font-medium text-gray-700 mb-1;
+  }
+}
+
+.bid-input,
+.bid-select {
+  @apply px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none text-lg font-semibold w-32;
+}
+
+.multiplier {
+  @apply text-2xl text-gray-600 mb-2;
+}
+
+.action-buttons {
+  @apply flex gap-4 justify-center;
+}
+
+.btn-bid,
+.btn-dudo,
+.btn-calza {
+  @apply px-8 py-3 rounded-lg font-bold text-lg transition-all;
+}
+
+.btn-bid {
+  @apply bg-green-600 text-white hover:bg-green-700;
+
+  &:disabled {
+    @apply bg-gray-400 cursor-not-allowed hover:bg-gray-400;
+  }
+}
+
+.btn-dudo {
+  @apply bg-red-600 text-white hover:bg-red-700 hover:scale-105;
+
+  &:disabled {
+    @apply bg-gray-400 cursor-not-allowed hover:bg-gray-400 hover:scale-100;
+  }
+}
+
+.btn-calza {
+  @apply bg-yellow-500 text-gray-900 hover:bg-yellow-600 hover:scale-105;
+
+  &:disabled {
+    @apply bg-gray-400 text-gray-600 cursor-not-allowed hover:bg-gray-400 hover:scale-100;
+  }
+}
+
+.other-players-section {
+  @apply bg-white rounded-lg p-6 shadow-lg;
+}
+
+.players-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4;
+}
+
+.dudo-result {
+  @apply bg-white rounded-lg p-8 shadow-2xl max-w-2xl mx-auto;
+}
+
+.result-title {
+  @apply text-3xl font-bold text-center text-gray-800 mb-6;
+}
+
+.result-info {
+  @apply bg-gray-100 rounded-lg p-6 mb-6;
+
+  &.calza {
+    @apply bg-gradient-to-r from-yellow-100 to-orange-100 border-2 border-yellow-500;
+  }
+}
+
+.result-text {
+  @apply text-lg mb-2;
+}
+
+.result-verdict {
+  @apply text-2xl font-bold mt-4;
+
+  &.correct {
+    @apply text-green-600;
+  }
+
+  &:not(.correct):not(.calza) {
+    @apply text-red-600;
+  }
+
+  &.calza {
+    @apply text-yellow-600;
+  }
+}
+
+.all-dice {
+  @apply mb-6;
+
+  h3 {
+    @apply text-lg font-semibold mb-3;
+  }
+}
+
+.btn-continue {
+  @apply w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-bold text-lg;
+}
+
+.game-over {
+  @apply bg-white rounded-lg p-12 shadow-2xl max-w-md mx-auto text-center;
+}
+
+.game-over-title {
+  @apply text-4xl font-bold text-yellow-500 mb-4;
+}
+
+.winner-announcement {
+  @apply text-2xl text-gray-800 mb-8;
+
+  strong {
+    @apply text-blue-600;
+  }
+}
+
+.btn-new-game {
+  @apply w-full py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-bold text-lg;
+}

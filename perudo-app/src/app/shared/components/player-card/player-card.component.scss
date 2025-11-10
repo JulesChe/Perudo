@@ -1,0 +1,53 @@
+.player-card {
+  @apply bg-white rounded-lg shadow-md p-4 border-2 border-gray-200;
+  transition: all 0.3s ease;
+
+  &-active {
+    @apply border-blue-500 bg-blue-50;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+
+  &-eliminated {
+    @apply opacity-50 border-red-300 bg-gray-100;
+  }
+
+  &-compact {
+    @apply p-2;
+  }
+}
+
+.player-header {
+  @apply flex justify-between items-start mb-3;
+}
+
+.player-info {
+  @apply flex flex-col gap-1;
+}
+
+.player-name {
+  @apply text-lg font-bold text-gray-800;
+}
+
+.status-badge {
+  @apply text-xs font-semibold px-2 py-1 bg-blue-500 text-white rounded-full inline-block w-fit;
+}
+
+.palifico-badge {
+  @apply text-xs font-semibold px-2 py-1 bg-yellow-500 text-white rounded-full inline-block w-fit;
+}
+
+.dice-count {
+  @apply flex flex-col items-center bg-gray-100 rounded-lg px-3 py-2;
+
+  &-number {
+    @apply text-2xl font-bold text-blue-600;
+  }
+
+  &-label {
+    @apply text-xs text-gray-600;
+  }
+}
+
+.player-dice {
+  @apply flex flex-wrap gap-2 mt-3 pt-3 border-t border-gray-200;
+}

@@ -1,0 +1,158 @@
+<div class="game-container" *ngIf="gameState">
+  <!-- Header -->
+  <div class="game-header">
+    <h1 class="game-title">🎲 Perudo</h1>
+    <button (click)="backToMenu()" class="btn-back">Menu</button>
+  </div>
+
+  <!-- Phase du jeu -->
+  <div class="phase-banner" [class.palifico]="gameState.isPalifico">
+    <span>{{ phaseMessage }}</span>
+    <span *ngIf="gameState.isPalifico" class="palifico-warning">
+      Pas de jokers ! Seule la quantité peut augmenter.
+    </span>
+  </div>
+
+  <!-- Phase de jeu normale -->
+  <div *ngIf="gameState.phase === GamePhase.BIDDING" class="game-content">
+    <!-- Joueur actuel -->
+    <div class="current-player-section">
+      <h2 class="section-title">Vos dés ({{ currentPlayer?.name }})</h2>
+      <div class="dice-container">
+        <app-die
+          *ngFor="let die of currentPlayerDice"
+          [value]="die.value"
+          [isVisible]="true"
+          size="large"
+        ></app-die>
+      </div>
+    </div>
+
+    <!-- Enchère actuelle -->
+    <div *ngIf="gameState.currentBid" class="current-bid-section">
+      <h3>Enchère actuelle</h3>
+      <div class="current-bid">
+        <span class="bid-quantity">{{ gameState.currentBid.quantity }}</span>
+        <span class="bid-label">×</span>
+        <app-die [value]="gameState.currentBid.value" [isVisible]="true" size="medium"></app-die>
+      </div>
+    </div>
+
+    <!-- Contrôles d'enchère -->
+    <div class="bid-controls">
+      <h3>Votre enchère</h3>
+      <div class="bid-inputs">
+        <div class="input-group">
+          <label>Quantité</label>
+          <input
+            type="number"
+            [(ngModel)]="bidQuantity"
+            min="1"
+            [max]="gameStateService.getTotalDiceCount()"
+            class="bid-input"
+          />
+        </div>
+
+        <span class="multiplier">×</span>
+
+        <div class="input-group">
+          <label>Valeur</label>
+          <select [(ngModel)]="bidValue" class="bid-select">
+            <option *ngFor="let value of dieValues" [value]="value">
+              {{ value }} {{ value === 1 ? '(As)' : '' }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button
+          (click)="placeBid()"
+          [disabled]="!isBidValid"
+          class="btn-bid"
+        >
+          Enchérir
+        </button>
+        <button
+          (click)="callDudo()"
+          [disabled]="!gameState.currentBid"
+          class="btn-dudo"
+        >
+          DUDO !
+        </button>
+        <button
+          (click)="callCalza()"
+          [disabled]="!gameState.currentBid"
+          class="btn-calza"
+          title="Pari que l'enchère est exactement correcte"
+        >
+          CALZA !
+        </button>
+      </div>
+    </div>
+
+    <!-- Autres joueurs -->
+    <div class="other-players-section">
+      <h3 class="section-title">Autres joueurs</h3>
+      <div class="players-grid">
+        <app-player-card
+          *ngFor="let player of otherPlayers"
+          [player]="player"
+          [showDice]="false"
+          [isCompact]="true"
+        ></app-player-card>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase Dudo Challenge -->
+  <div *ngIf="gameState.phase === GamePhase.DUDO_CHALLENGE && gameState.lastDudoResult" class="dudo-result">
+    <h2 class="result-title">
+      {{ gameState.lastDudoResult.isCalza ? '🎯 CALZA !' : 'Résultat du DUDO' }}
+    </h2>
+
+    <div class="result-info" [class.calza]="gameState.lastDudoResult.isCalza">
+      <p class="result-text">
+        Enchère: <strong>{{ gameState.lastDudoResult.challengedBid.quantity }}×
+        {{ gameState.lastDudoResult.challengedBid.value }}</strong>
+      </p>
+      <p class="result-text">
+        Nombre réel: <strong>{{ gameState.lastDudoResult.actualCount }}</strong>
+      </p>
+
+      <p *ngIf="gameState.lastDudoResult.isCalza" class="result-verdict calza">
+        🎉 Pile poil ! Le joueur qui a fait l'enchère gagne un dé !
+      </p>
+      <p *ngIf="!gameState.lastDudoResult.isCalza" class="result-verdict" [class.correct]="gameState.lastDudoResult.wasCorrect">
+        {{ gameState.lastDudoResult.wasCorrect ? '✓ Challenge réussi !' : '✗ Challenge échoué !' }}
+      </p>
+    </div>
+
+    <div class="all-dice">
+      <h3>Tous les dés révélés:</h3>
+      <div class="dice-container">
+        <app-die
+          *ngFor="let die of gameState.lastDudoResult.allDice"
+          [value]="die.value"
+          [isVisible]="true"
+          size="medium"
+        ></app-die>
+      </div>
+    </div>
+
+    <button (click)="continueGame()" class="btn-continue">
+      Continuer
+    </button>
+  </div>
+
+  <!-- Phase Game Over -->
+  <div *ngIf="gameState.phase === GamePhase.GAME_OVER" class="game-over">
+    <h2 class="game-over-title">🏆 Partie terminée !</h2>
+    <p class="winner-announcement">
+      <strong>{{ winner?.name }}</strong> remporte la partie !
+    </p>
+    <button (click)="newGame()" class="btn-new-game">
+      Nouvelle partie
+    </button>
+  </div>
+</div>
